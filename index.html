@@ -3,63 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شركة فضاء التقنية - قائمة الأسعار</title>
+    <title>شركة فضاء التقنية - منظومة الأسعار الحديثة</title>
     <style>
         :root {
-            --primary-color: #2563eb;
-            --bg-color: #f8fafc;
-            --text-color: #1e293b;
-            --card-bg: #ffffff;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(99, 102, 241, 0.2);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.4);
+            --accent: #10b981;
         }
-        
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
             padding: 20px;
+            display: flex;
+            justify-content: center;
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            width: 100%;
+            max-width: 750px;
+            margin-top: 10px;
         }
 
+        /* رأس الصفحة والهوية */
         header {
             text-align: center;
             margin-bottom: 30px;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-placeholder {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 0 20px var(--primary-glow);
+            font-weight: bold;
         }
 
         h1 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to left, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        /* شريط الوقت والمعلومات */
+        .info-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+            background: rgba(15, 23, 42, 0.4);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .live-pulse {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            margin-left: 6px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* صندوق البحث الذكي */
+        .search-wrapper {
+            position: relative;
+            margin-bottom: 25px;
         }
 
         .search-box {
             width: 100%;
-            padding: 12px 20px;
+            padding: 16px 20px;
             font-size: 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            box-sizing: border-box;
-            margin-bottom: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            color: white;
             outline: none;
-            transition: border-color 0.3s;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .search-box:focus {
-            border-color: var(--primary-color);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
         }
 
-        .loading, .error-msg {
-            text-align: center;
-            padding: 20px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .error-msg { color: #dc2626; }
-
+        /* قائمة وبطاقات الأصناف */
         .items-list {
             display: grid;
             gap: 15px;
@@ -67,34 +142,70 @@
 
         .item-card {
             background: var(--card-bg);
-            padding: 15px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--card-border);
+            padding: 18px 20px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-right: 5px solid var(--primary-color);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .item-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        .item-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
         .item-name {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
+            color: #ffffff;
         }
 
-        .item-price {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .price-details {
+        .price-section {
             text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
-        .min-price {
+        .normal-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #6366f1;
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+        }
+
+        .min-price-box {
             font-size: 12px;
-            color: #64748b;
-            margin-top: 4px;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            display: inline-block;
+        }
+
+        /* رسائل الحالة */
+        .status-msg {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .error-msg {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
         }
     </style>
 </head>
@@ -102,40 +213,55 @@
 
 <div class="container">
     <header>
-        <h1>قائمة أسعار المواد</h1>
-        <p>شركة فضاء التقنية</p>
+        <!-- يمكنك استبدال النص ف بـ لوجو الشركة لاحقاً <img src="logo.png"> -->
+        <div class="logo-placeholder">ف</div>
+        <h1>شركة فضاء التقنية</h1>
+        <div class="subtitle">منظومة تحديث وقراءة الأسعار الفورية</div>
     </header>
 
-    <input type="text" id="search" class="search-box" placeholder="ابحث عن صنف...">
+    <div class="info-bar">
+        <div><span class="live-pulse"></span>تحديث فوري نشط</div>
+        <div id="liveClock">جاري تحميل الوقت...</div>
+    </div>
 
-    <div id="loading" class="loading">جاري تحميل الأصناف والأسعار...</div>
-    <div id="error" class="error-msg" style="display: none;">عذراً، تعذر تحميل البيانات. تأكد من إعدادات نشر الـ Sheet.</div>
+    <div class="search-wrapper">
+        <input type="text" id="search" class="search-box" placeholder="ابحث عن اسم المادة أو الصنف...">
+    </div>
+
+    <div id="loading" class="status-msg">جاري الاتصال بقاعدة البيانات وجلب الأسعار...</div>
+    <div id="error" class="status-msg error-msg" style="display: none;">عذراً، فشل جلب البيانات. يرجى التحقق من اتصال الإنترنت أو إعدادات المستند.</div>
     
     <div id="itemsContainer" class="items-list"></div>
 </div>
 
 <script>
-    // الرابط المباشر والجاهز الخاص بك
+    // رابط الـ CSV المباشر والخاص بك
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSn5uA56Qo_nydx3V_pK7IgZKR22Hx_zjilNdpBNbnqelTWsqnjmMt4lE19HtnZbsVsLnUqsLZ94zU/pub?output=csv';
 
     let allItems = [];
 
-    // دالة لتحويل نص CSV إلى مصفوفة كائنات
+    // تحديث الساعة والوقت تلقائياً
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('liveClock').innerText = now.toLocaleTimeString('ar-LY', {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // معالجة ونمذجة ملف الـ CSV
     function parseCSV(text) {
         const lines = text.split('\n');
         const result = [];
         
-        // يتجاوز السطر الأول (العناوين) ويبدأ بقراءة البيانات مباشرة
         for (let i = 1; i < lines.length; i++) {
             if (!lines[i].trim()) continue;
             
-            // تقسيم السطر بناءً على الفواصل (CSV)
             const cells = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
             
             if (cells.length >= 2) {
                 result.push({
                     name: cells[0].replace(/"/g, '').trim(),
-                    price: cells[1] ? cells[1].trim() : 'غير محدد',
+                    price: cells[1] ? cells[1].trim() : '0',
                     minPrice: cells[2] ? cells[2].trim() : ''
                 });
             }
@@ -143,13 +269,13 @@
         return result;
     }
 
-    // دالة عرض العناصر في الصفحة
+    // عرض المنتجات بشكل بطاقات (Cards) احترافية
     function displayItems(items) {
         const container = document.getElementById('itemsContainer');
         container.innerHTML = '';
         
         if (items.length === 0) {
-            container.innerHTML = '<div class="loading">لا توجد أصناف مطابقة للبحث.</div>';
+            container.innerHTML = '<div class="status-msg">لم يتم العثور على أصناف مطابقة للبحث.</div>';
             return;
         }
 
@@ -157,13 +283,14 @@
             const card = document.createElement('div');
             card.className = 'item-card';
             
-            // إذا كان هناك حد أدنى للسعر يظهر بخط صغير في الأسفل
-            let minPriceHTML = item.minPrice ? `<div class="min-price">أقل سعر: ${item.minPrice} د.ل</div>` : '';
+            let minPriceHTML = item.minPrice ? `<div class="min-price-box">أقل بيع: ${item.minPrice} د.ل</div>` : '';
             
             card.innerHTML = `
-                <div class="item-name">${item.name}</div>
-                <div class="price-details">
-                    <div class="item-price">${item.price} د.ل</div>
+                <div class="item-details">
+                    <div class="item-name">${item.name}</div>
+                </div>
+                <div class="price-section">
+                    <div class="normal-price">${item.price} د.ل</div>
                     ${minPriceHTML}
                 </div>
             `;
@@ -171,7 +298,7 @@
         });
     }
 
-    // جلب البيانات من الرابط مباشرة
+    // الاتصال وجلب البيانات
     fetch(SHEET_CSV_URL)
         .then(response => {
             if (!response.ok) throw new Error('Network error');
@@ -185,10 +312,10 @@
         .catch(error => {
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'block';
-            console.error('Error fetching data:', error);
+            console.error(error);
         });
 
-    // ميزة البحث السريع الفوري
+    // البحث الفوري الذكي
     document.getElementById('search').addEventListener('input', (e) => {
         const searchText = e.target.value.toLowerCase();
         const filtered = allItems.filter(item => 
