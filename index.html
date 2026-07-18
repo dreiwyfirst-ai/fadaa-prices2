@@ -1,339 +1,422 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شركة fadaa-prices2 - دليل الأسعار الإلكتروني</title>
-    <style>
-        :root {
-            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --card-border: rgba(99, 102, 241, 0.2);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #3b82f6;
-            --primary-glow: rgba(59, 130, 246, 0.4);
-            --accent: #10b981;
-        }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-        body {
-            background: var(--bg-gradient);
-            color: var(--text-main);
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
+<title>فضاء التقنية | الأسعار</title>
 
-        .container {
-            width: 100%;
-            max-width: 700px;
-            margin-top: 10px;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        /* رأس الصفحة والهوية */
-        header {
-            text-align: center;
-            margin-bottom: 25px;
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-        }
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-        .logo-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 15px;
-            display: block;
-            box-shadow: 0 0 20px var(--primary-glow);
-            border: 3px solid var(--primary);
-        }
+<link rel="stylesheet" href="style.css">
 
-        h1 {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(to left, #fff, #93c5fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: var(--text-muted);
-        }
-
-        /* شريط الوقت والمعلومات */
-        .meta-info {
-            background-color: rgba(15, 23, 42, 0.5);
-            padding: 12px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: var(--text-muted);
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            border-right: 4px solid var(--primary);
-            border-left: 1px solid var(--card-border);
-            text-align: right;
-        }
-
-        .update-time {
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        /* صندوق البحث الذكي */
-        .search-box {
-            width: 100%;
-            padding: 14px 20px;
-            font-size: 16px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 25px;
-            color: white;
-            outline: none;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            text-align: right;
-        }
-
-        .search-box:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        .status {
-            color: #e67e22;
-            font-weight: bold;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        /* تنسيق جدول العرض الاحترافي المتناسق مع الديزاين */
-        .table-responsive {
-            overflow-x: auto;
-            margin-top: 20px;
-            background: var(--card-bg);
-            border-radius: 16px;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            text-align: center;
-        }
-
-        th {
-            background-color: rgba(30, 41, 59, 0.9);
-            color: #93c5fd;
-            font-weight: 600;
-            border-bottom: 2px solid var(--card-border);
-        }
-
-        tr:hover {
-            background-color: rgba(255, 255, 255, 0.02);
-        }
-
-        .no-result {
-            color: var(--text-muted);
-            text-align: center;
-            padding: 30px;
-        }
-
-        .badge {
-            background-color: rgba(59, 130, 246, 0.2);
-            color: #93c5fd;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 16px;
-            font-weight: bold;
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            display: inline-block;
-        }
-
-        .badge-min {
-            background-color: rgba(16, 185, 129, 0.15);
-            color: #34d399;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            margin-top: 5px;
-            display: block;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-    </style>
 </head>
+
 <body>
 
-    <div class="container">
-        <!-- قسم الشعار المطور -->
-        <header>
-            <div class="logo-container">
-                <!-- سيقرأ ملف logo.jpg عند رفعه، أو يعرض شعاراً مؤقتاً ذكياً بدلاً من التوقف -->
-                <img src="logo.jpg" alt="شعار شركة فضاء التقنية" class="logo-img" onerror="this.src='https://via.placeholder.com/150/1e1b4b/93c5fd?text=FADAA'">
-            </div>
-            <h1>شركة فضاء التقنية</h1>
-            <div class="subtitle">دليل الأسعار الإلكتروني المطور</div>
-        </header>
-        
-        <!-- قسم الوقت والتاريخ والتحديث الحقيقي -->
-        <div class="meta-info">
-            <div id="liveClock">📅 التاريخ: --/--/---- | ⏰ الوقت: --:--:--</div>
-            <div id="lastUpdateTime" class="update-time">🔄 جاري التحقق من آخر تحديث للأسعار...</div>
-        </div>
+<div id="loading">
 
-        <input type="text" id="searchInput" class="search-box" placeholder="🔍 ابحث باسم الصنف...">
-        
-        <div id="statusMessage" class="status">🚧 جاري تحميل البيانات من النظام...</div>
-        
-        <div class="table-responsive">
-            <div id="resultsContainer"></div>
-        </div>
-    </div>
+<div class="loader"></div>
 
-    <script>
-        // رابط الـ CSV المباشر الخاص بك والمجرب
-        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSn5uA56Qo_nydx3V_pK7IgZKR22Hx_zjilNdpBNbnqelTWsqnjmMt4lE19HtnZbsVsLnUqsLZ94zU/pub?output=csv';
-        
-        let products = [];
+<p>جاري تحميل الأسعار...</p>
 
-        // 1. تحديث الساعة الحية والتاريخ الفوري
-        function updateClock() {
-            const now = new Date();
-            const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-            const dateStr = now.toLocaleDateString('ar-LY', options);
-            const timeStr = now.toLocaleTimeString('ar-LY', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            
-            document.getElementById('liveClock').innerHTML = `📅 التاريخ: ${dateStr} | ⏰ الوقت: ${timeStr}`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
+</div>
 
-        // 2. جلب وتحديث البيانات تلقائياً
-        async function loadPrices() {
-            try {
-                const response = await fetch(SHEET_URL);
-                if (!response.ok) throw new Error('Network error');
-                
-                const data = await response.text();
-                products = parseCSV(data);
-                
-                document.getElementById('statusMessage').style.display = 'none';
+<header>
 
-                // إظهار وقت آخر تعديل تم على ملف قوقل شيت
-                const lastModified = response.headers.get('Last-Modified');
-                if (lastModified) {
-                    const updateDate = new Date(lastModified);
-                    const formattedUpdate = updateDate.toLocaleString('ar-LY', {
-                        year: 'numeric', month: '2-digit', day: '2-digit',
-                        hour: '2-digit', minute: '2-digit'
-                    });
-                    document.getElementById('lastUpdateTime').innerHTML = `⏱️ آخر تحديث للأسعار في النظام: ${formattedUpdate}`;
-                } else {
-                    document.getElementById('lastUpdateTime').innerHTML = `⏱️ تم تحديث الأسعار فوراً عند فتح الصفحة`;
-                }
+<div class="header-left">
 
-                displayResults(products);
+<img src="logo.png" id="logo">
 
-            } catch (error) {
-                console.error(error);
-                document.getElementById('statusMessage').innerText = "❌ حدث خطأ أثناء تحميل الأسعار من النظام.";
-                document.getElementById('lastUpdateTime').innerHTML = `⚠️ تعذر قراءة وقت التحديث`;
-            }
-        }
+<div>
 
-        // تفكيك الكود ومعالجة البيانات بشكل سليم
-        function parseCSV(csvText) {
-            const lines = csvText.split('\n');
-            const result = [];
-            
-            for (let i = 1; i < lines.length; i++) {
-                if (!lines[i].trim()) continue;
-                
-                const columns = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                
-                if (columns.length >= 2) {
-                    result.push({
-                        name: columns[0].replace(/"/g, '').trim(),
-                        price: columns[1] ? columns[1].trim() : '-',
-                        minPrice: columns[2] ? columns[2].trim() : ''
-                    });
-                }
-            }
-            return result;
-        }
+<h1>فضاء التقنية</h1>
 
-        // محرك البحث الفوري
-        const searchInput = document.getElementById('searchInput');
-        const resultsContainer = document.getElementById('resultsContainer');
+<p>منظومة الأسعار المباشرة</p>
 
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            
-            if (query === '') {
-                displayResults(products);
-                return;
-            }
+</div>
 
-            const filtered = products.filter(product => {
-                return product.name && product.name.toLowerCase().includes(query);
-            });
+</div>
 
-            displayResults(filtered);
-        });
+<div class="header-right">
 
-        // دالة العرض المتناسقة مع القالب المظلم الفاخر
-        function displayResults(results) {
-            if (results.length === 0) {
-                resultsContainer.innerHTML = '<p class="no-result">عذراً، الصنف غير موجود</p>';
-                return;
-            }
+<div id="clock"></div>
 
-            let html = `<table>
-                            <tr>
-                                <th>الصنف والمادة</th>
-                                <th>السعر المعروض</th>
-                            </tr>`;
-            
-            results.forEach(product => {
-                let minPriceHTML = product.minPrice ? `<span class="badge-min">أقل سعر: ${product.minPrice} د.ل</span>` : '';
-                
-                html += `<tr>
-                            <td><strong>${product.name || '-'}</strong></td>
-                            <td>
-                                <span class="badge">${product.price || '-'} د.ل</span>
-                                ${minPriceHTML}
-                            </td>
-                         </tr>`;
-            });
-            
-            html += '</table>';
-            resultsContainer.innerHTML = html;
-        }
+<div id="date"></div>
 
-        loadPrices();
-    </script>
+</div>
+
+</header>
+
+<div class="container">
+
+<div class="top-bar">
+
+<input
+type="text"
+id="search"
+placeholder="🔍 ابحث عن أي صنف">
+
+<div class="buttons">
+
+<button id="refresh">
+
+تحديث
+
+</button>
+
+<button id="lowest">
+
+أقل سعر للبيع
+
+</button>
+
+</div>
+
+</div>
+
+<div class="table-container">
+
+<table id="prices">
+
+<thead>
+
+<tr id="thead"></tr>
+
+</thead>
+
+<tbody id="tbody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<div id="modal">
+
+<div class="modal-box">
+
+<span id="close">&times;</span>
+
+<h2>
+
+أقل سعر للبيع
+
+</h2>
+
+<div id="result"></div>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 FADAA TECH
+
+</footer>
+
+<script src="script.js"></script>
+
 </body>
+
 </html>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Cairo',sans-serif;
+}
+
+body{
+background:#eef3f9;
+color:#222;
+}
+
+header{
+background:#0d6efd;
+color:#fff;
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+box-shadow:0 3px 15px rgba(0,0,0,.15);
+}
+
+.header-left{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+#logo{
+width:70px;
+height:70px;
+border-radius:50%;
+background:white;
+object-fit:cover;
+}
+
+.header-left h1{
+font-size:30px;
+font-weight:800;
+}
+
+.header-left p{
+opacity:.9;
+}
+
+.header-right{
+text-align:left;
+font-size:18px;
+font-weight:700;
+}
+
+.container{
+max-width:1400px;
+margin:25px auto;
+padding:20px;
+}
+
+.top-bar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+flex-wrap:wrap;
+margin-bottom:20px;
+}
+
+#search{
+flex:1;
+padding:14px;
+font-size:17px;
+border:none;
+border-radius:12px;
+outline:none;
+box-shadow:0 0 10px rgba(0,0,0,.08);
+}
+
+.buttons{
+display:flex;
+gap:10px;
+}
+
+button{
+background:#0d6efd;
+color:white;
+border:none;
+padding:13px 22px;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+font-weight:bold;
+}
+
+button:hover{
+background:#084db3;
+transform:translateY(-2px);
+}
+
+.table-container{
+background:white;
+border-radius:15px;
+overflow:auto;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:900px;
+}
+
+thead{
+background:#0d6efd;
+color:white;
+position:sticky;
+top:0;
+z-index:5;
+}
+
+th{
+padding:16px;
+font-size:16px;
+}
+
+td{
+padding:14px;
+text-align:center;
+border-bottom:1px solid #eee;
+font-size:15px;
+}
+
+tbody tr:nth-child(even){
+background:#f7f9fc;
+}
+
+tbody tr:hover{
+background:#dbeafe;
+transition:.2s;
+}
+
+footer{
+margin-top:30px;
+text-align:center;
+padding:20px;
+color:#666;
+font-size:15px;
+}
+
+#loading{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:white;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.loader{
+width:70px;
+height:70px;
+border:7px solid #ddd;
+border-top:7px solid #0d6efd;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-bottom:20px;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+#modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.55);
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+.modal-box{
+background:white;
+padding:30px;
+border-radius:15px;
+width:420px;
+max-width:90%;
+text-align:center;
+position:relative;
+animation:pop .3s;
+}
+
+@keyframes pop{
+from{
+transform:scale(.8);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+#close{
+position:absolute;
+top:12px;
+left:15px;
+font-size:28px;
+cursor:pointer;
+font-weight:bold;
+}
+
+#result{
+margin-top:20px;
+font-size:22px;
+font-weight:bold;
+color:#0d6efd;
+line-height:1.8;
+}
+
+@media(max-width:768px){
+
+header{
+padding:20px;
+text-align:center;
+}
+
+.header-left,
+.header-right{
+width:100%;
+justify-content:center;
+margin-bottom:10px;
+}
+
+.top-bar{
+flex-direction:column;
+}
+
+#search{
+width:100%;
+}
+
+.buttons{
+width:100%;
+display:grid;
+grid-template-columns:1fr 1fr;
+}
+
+button{
+width:100%;
+}
+
+
+document.getElementById("lowest").onclick = () => {
+
+    let minPrice = Infinity;
+    let productName = "";
+
+    rows.forEach(row => {
+
+        const price = parseFloat(row[3]);
+
+        if (!isNaN(price) && price < minPrice) {
+
+            minPrice = price;
+            productName = row[0];
+
+        }
+
+    });
+
+    document.getElementById("result").innerHTML = `
+        <h3>${productName}</h3>
+        <br>
+        أقل سعر للبيع:
+        <br><br>
+        <b>${minPrice}</b>
+    `;
+
+    modal.style.display = "flex";
+
+};
