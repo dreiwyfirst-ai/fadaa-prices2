@@ -1,422 +1,256 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>فضاء التقنية | الأسعار</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة فضاء التقنية - دليل الأسعار</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 650px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        /* تنسيق الشعار */
+        .logo-container {
+            margin-bottom: 15px;
+        }
+        .logo-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 3px solid #007bff;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin: 10px 0 5px 0;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        /* تنسيق الوقت والتاريخ والتحديث */
+        .meta-info {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #555;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            border-right: 4px solid #007bff;
+        }
+        .update-time {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            font-size: 16px;
+            text-align: right;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .search-box:focus {
+            border-color: #007bff;
+        }
+        .status {
+            color: #e67e22;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .no-result {
+            color: #95a5a6;
+            margin-top: 20px;
+        }
+        .badge {
+            background-color: #2ecc71;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .badge-min {
+            background-color: #e74c3c;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div id="loading">
-
-<div class="loader"></div>
-
-<p>جاري تحميل الأسعار...</p>
-
-</div>
-
-<header>
-
-<div class="header-left">
-
-<img src="logo.png" id="logo">
-
-<div>
-
-<h1>فضاء التقنية</h1>
-
-<p>منظومة الأسعار المباشرة</p>
-
-</div>
-
-</div>
-
-<div class="header-right">
-
-<div id="clock"></div>
-
-<div id="date"></div>
-
-</div>
-
-</header>
-
-<div class="container">
-
-<div class="top-bar">
-
-<input
-type="text"
-id="search"
-placeholder="🔍 ابحث عن أي صنف">
-
-<div class="buttons">
-
-<button id="refresh">
-
-تحديث
-
-</button>
-
-<button id="lowest">
-
-أقل سعر للبيع
-
-</button>
-
-</div>
-
-</div>
-
-<div class="table-container">
-
-<table id="prices">
-
-<thead>
-
-<tr id="thead"></tr>
-
-</thead>
-
-<tbody id="tbody"></tbody>
-
-</table>
-
-</div>
-
-</div>
-
-<div id="modal">
-
-<div class="modal-box">
-
-<span id="close">&times;</span>
-
-<h2>
-
-أقل سعر للبيع
-
-</h2>
-
-<div id="result"></div>
-
-</div>
-
-</div>
-
-<footer>
-
-© 2026 FADAA TECH
-
-</footer>
-
-<script src="script.js"></script>
-
-</body>
-
-</html>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Cairo',sans-serif;
-}
-
-body{
-background:#eef3f9;
-color:#222;
-}
-
-header{
-background:#0d6efd;
-color:#fff;
-padding:20px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
-box-shadow:0 3px 15px rgba(0,0,0,.15);
-}
-
-.header-left{
-display:flex;
-align-items:center;
-gap:15px;
-}
-
-#logo{
-width:70px;
-height:70px;
-border-radius:50%;
-background:white;
-object-fit:cover;
-}
-
-.header-left h1{
-font-size:30px;
-font-weight:800;
-}
-
-.header-left p{
-opacity:.9;
-}
-
-.header-right{
-text-align:left;
-font-size:18px;
-font-weight:700;
-}
-
-.container{
-max-width:1400px;
-margin:25px auto;
-padding:20px;
-}
-
-.top-bar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:15px;
-flex-wrap:wrap;
-margin-bottom:20px;
-}
-
-#search{
-flex:1;
-padding:14px;
-font-size:17px;
-border:none;
-border-radius:12px;
-outline:none;
-box-shadow:0 0 10px rgba(0,0,0,.08);
-}
-
-.buttons{
-display:flex;
-gap:10px;
-}
-
-button{
-background:#0d6efd;
-color:white;
-border:none;
-padding:13px 22px;
-border-radius:10px;
-font-size:16px;
-cursor:pointer;
-transition:.3s;
-font-weight:bold;
-}
-
-button:hover{
-background:#084db3;
-transform:translateY(-2px);
-}
-
-.table-container{
-background:white;
-border-radius:15px;
-overflow:auto;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-min-width:900px;
-}
-
-thead{
-background:#0d6efd;
-color:white;
-position:sticky;
-top:0;
-z-index:5;
-}
-
-th{
-padding:16px;
-font-size:16px;
-}
-
-td{
-padding:14px;
-text-align:center;
-border-bottom:1px solid #eee;
-font-size:15px;
-}
-
-tbody tr:nth-child(even){
-background:#f7f9fc;
-}
-
-tbody tr:hover{
-background:#dbeafe;
-transition:.2s;
-}
-
-footer{
-margin-top:30px;
-text-align:center;
-padding:20px;
-color:#666;
-font-size:15px;
-}
-
-#loading{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:white;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:999;
-}
-
-.loader{
-width:70px;
-height:70px;
-border:7px solid #ddd;
-border-top:7px solid #0d6efd;
-border-radius:50%;
-animation:spin 1s linear infinite;
-margin-bottom:20px;
-}
-
-@keyframes spin{
-100%{
-transform:rotate(360deg);
-}
-}
-
-#modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.55);
-justify-content:center;
-align-items:center;
-z-index:1000;
-}
-
-.modal-box{
-background:white;
-padding:30px;
-border-radius:15px;
-width:420px;
-max-width:90%;
-text-align:center;
-position:relative;
-animation:pop .3s;
-}
-
-@keyframes pop{
-from{
-transform:scale(.8);
-opacity:0;
-}
-to{
-transform:scale(1);
-opacity:1;
-}
-}
-
-#close{
-position:absolute;
-top:12px;
-left:15px;
-font-size:28px;
-cursor:pointer;
-font-weight:bold;
-}
-
-#result{
-margin-top:20px;
-font-size:22px;
-font-weight:bold;
-color:#0d6efd;
-line-height:1.8;
-}
-
-@media(max-width:768px){
-
-header{
-padding:20px;
-text-align:center;
-}
-
-.header-left,
-.header-right{
-width:100%;
-justify-content:center;
-margin-bottom:10px;
-}
-
-.top-bar{
-flex-direction:column;
-}
-
-#search{
-width:100%;
-}
-
-.buttons{
-width:100%;
-display:grid;
-grid-template-columns:1fr 1fr;
-}
-
-button{
-width:100%;
-}
-
-
-document.getElementById("lowest").onclick = () => {
-
-    let minPrice = Infinity;
-    let productName = "";
-
-    rows.forEach(row => {
-
-        const price = parseFloat(row[3]);
-
-        if (!isNaN(price) && price < minPrice) {
-
-            minPrice = price;
-            productName = row[0];
-
+    <div class="container">
+        <!-- قسم الشعار -->
+        <div class="logo-container">
+            <img src="logo.jpg" alt="شعار شركة فضاء التقنية" class="logo-img">
+        </div>
+
+        <h1>شركة فضاء التقنية</h1>
+        <div class="subtitle">دليل الأسعار الإلكتروني</div>
+        
+        <!-- قسم الوقت والتاريخ وآخر تحديث -->
+        <div class="meta-info">
+            <div id="liveClock">📅 التاريخ: --/--/---- | ⏰ الوقت: --:--:--</div>
+            <div id="lastUpdateTime" class="update-time">🔄 جاري التحقق من آخر تحديث للأسعار...</div>
+        </div>
+
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 ابحث باسم الصنف...">
+        
+        <div id="statusMessage" class="status">🚧 جاري تحميل البيانات من النظام...</div>
+        <div id="resultsContainer"></div>
+    </div>
+
+    <script>
+        // الرابط الخاص بك
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSn5uA56Qo_nydx3V_pK7IgZKR22Hx_zjilNdpBNbnqelTWsqnjmMt4lE19HtnZbsVsLnUqsLZ94zU/pub?output=csv';
+        
+        let products = [];
+
+        // 1. دالة الساعة الحية والتاريخ
+        function updateClock() {
+            const now = new Date();
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            const dateStr = now.toLocaleDateString('ar-LY', options);
+            const timeStr = now.toLocaleTimeString('ar-LY', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            
+            document.getElementById('liveClock').innerHTML = `📅 التاريخ: ${dateStr} | ⏰ الوقت: ${timeStr}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 2. دالة جلب البيانات ومعرفة وقت التحديث تلقائياً
+        async function loadPrices() {
+            try {
+                const response = await fetch(SHEET_URL);
+                const data = await response.text();
+                products = parseCSV(data);
+                
+                document.getElementById('statusMessage').style.display = 'none';
+
+                const lastModified = response.headers.get('Last-Modified');
+                if (lastModified) {
+                    const updateDate = new Date(lastModified);
+                    const formattedUpdate = updateDate.toLocaleString('ar-LY', {
+                        year: 'numeric', month: '2-digit', day: '2-digit',
+                        hour: '2-digit', minute: '2-digit'
+                    });
+                    document.getElementById('lastUpdateTime').innerHTML = `⏱️ آخر تحديث للأسعار: ${formattedUpdate}`;
+                } else {
+                    document.getElementById('lastUpdateTime').innerHTML = `⏱️ تم تحديث الأسعار فوراً عند فتح الصفحة`;
+                }
+
+            } catch (error) {
+                console.error("خطأ في الاتصال:", error);
+                document.getElementById('statusMessage').innerText = "❌ حدث خطأ أثناء تحميل الأسعار.";
+                document.getElementById('lastUpdateTime').innerHTML = `⚠️ تعذر معرفة وقت التحديث`;
+            }
         }
 
-    });
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n');
+            if (lines.length === 0) return [];
+            
+            // تنظيف وترتيب العناوين من السطر الأول وتجاهل الرموز الغريبة مثل #
+            const headers = lines[0].replace(/"/g, '').split(',').map(h => h.replace('#', '').trim().toLowerCase());
+            
+            return lines.slice(1).map(line => {
+                if (!line.trim()) return null;
+                const columns = line.replace(/"/g, '').split(',');
+                let obj = {};
+                headers.forEach((header, index) => {
+                    obj[header] = columns[index] ? columns[index].trim() : '';
+                });
+                return obj;
+            }).filter(item => item !== null);
+        }
 
-    document.getElementById("result").innerHTML = `
-        <h3>${productName}</h3>
-        <br>
-        أقل سعر للبيع:
-        <br><br>
-        <b>${minPrice}</b>
-    `;
+        // محرك البحث
+        const searchInput = document.getElementById('searchInput');
+        const resultsContainer = document.getElementById('resultsContainer');
 
-    modal.style.display = "flex";
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            if (query === '') {
+                resultsContainer.innerHTML = '';
+                return;
+            }
 
-};
+            const filtered = products.filter(product => {
+                return product.name && product.name.toLowerCase().includes(query);
+            });
+
+            displayResults(filtered);
+        });
+
+        function displayResults(results) {
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<p class="no-result">عذراً، الصنف غير موجود</p>';
+                return;
+            }
+
+            let html = `<table>
+                            <tr>
+                                <th>الصنف</th>
+                                <th>الكمية</th>
+                                <th>السعر</th>
+                                <th>أقل سعر</th>
+                            </tr>`;
+            
+            results.forEach(product => {
+                // الكود يتعرف على العناوين بناء على أسماء الأعمدة في ملفك
+                html += `<tr>
+                            <td><strong>${product.name || '-'}</strong></td>
+                            <td>${product.quantity || '-'}</td>
+                            <td><span class="badge">${product.price || '-'}</span></td>
+                            <td><span class="badge-min">${product['min-price'] || '-'}</span></td>
+                         </tr>`;
+            });
+            
+            html += '</table>';
+            resultsContainer.innerHTML = html;
+        }
+
+        loadPrices();
+    </script>
+</body>
+</html>
