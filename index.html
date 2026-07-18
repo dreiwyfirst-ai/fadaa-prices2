@@ -42,6 +42,26 @@
             margin-top: 0;
             margin-bottom: 15px;
         }
+        .greeting-box {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.6;
+            box-shadow: 0 4px 10px rgba(0,123,255,0.2);
+        }
+        .greeting-main {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .greeting-quote {
+            font-style: italic;
+            opacity: 0.9;
+            font-size: 14px;
+        }
         .meta-info {
             background-color: #f8f9fa;
             padding: 10px;
@@ -113,12 +133,26 @@
             border-radius: 5px;
             font-size: 14px;
         }
+        /* تنسيق زر إظهار السعر المخفي */
+        .show-price-btn {
+            background-color: #7f8c8d;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-family: inherit;
+            transition: background-color 0.2s;
+        }
+        .show-price-btn:hover {
+            background-color: #34495e;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- قسم الشعار -->
         <div class="logo-container">
             <img src="logo.jpg" alt="شعار شركة فضاء التقنية" class="logo-img">
         </div>
@@ -126,7 +160,11 @@
         <h1>شركة فضاء التقنية</h1>
         <div class="subtitle">دليل الأسعار الإلكتروني</div>
         
-        <!-- قسم الوقت والتاريخ وآخر تحديث -->
+        <div class="greeting-box" id="greetingBox">
+            <div class="greeting-main" id="greetingText">مرحباً بك في فضاء التقنية ✨</div>
+            <div class="greeting-quote" id="quoteText">نتمنى لك يوماً سعيداً ومليئاً بالتوفيق.</div>
+        </div>
+
         <div class="meta-info">
             <div id="liveClock">📅 التاريخ: --/--/---- | ⏰ الوقت: --:--:--</div>
             <div id="lastUpdateTime" class="update-time">🔄 جاري التحقق من آخر تحديث للأسعار...</div>
@@ -139,16 +177,51 @@
     </div>
 
     <script>
-        // رابط الشيت الأساسي
         const BASE_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSSn5uA56Qo_nydx3V_pK7IgZKR22Hx_zjilNdpBNbnqelTWsqnjmMt4lE19HtnZbsVsLnUqsLZ94zU/pub';
-        
-        // جلب الصفحتين (الأساسية الممثلة برقم 0، والصفحة الثانية المعطاة)
         const URL_PAGE_1 = `${BASE_URL}?gid=0&output=csv`;
         const URL_PAGE_2 = `${BASE_URL}?gid=980123048&output=csv`;
         
         let products = [];
 
-        // 1. دالة الساعة الحية والتاريخ
+        function setupSmartGreeting() {
+            const hour = new Date().getHours();
+            const greetingTextEl = document.getElementById('greetingText');
+            const quoteTextEl = document.getElementById('quoteText');
+
+            const morningQuotes = [
+                "أصبحنا وأصبح الملك لله.. نسأل الله أن يفتح لكم أبواب الرزق والتوفيق اليوم 🌅",
+                "صباح الخير والبركة! بداية يوم جديدة مليئة بالفرص والنجاح المتجدد 🚀",
+                "اللهم بك أصبحنا، وعليك توكلنا.. يومكم مبارك وموفق بإذن الله 🎯",
+                "تفاءل وابدأ يومك بكل طاقة إيجابية.. أهلاً بك في دليل أسعارنا المطور 💡"
+            ];
+
+            const eveningQuotes = [
+                "مساء الخير والأنوار.. نسأل الله لكم راحة البال والبركة في الرزق 🌙",
+                "يسعدنا تواجدكم معنا هذا المساء.. نتمنى لكم جولة تسوق وتصفح ممتازة ✨",
+                "اللهم اجعل هذا المساء حاملاً لنا من الخير فوق ما نرجو 🤲",
+                "أهلاً بك.. نسعى دائماً لتقديم أفضل الأسعار لكم في كل وقت 💼"
+            ];
+
+            const nightQuotes = [
+                "مرحباً بك في فضاء التقنية.. نسأل الله لك التوفيق والسداد دائماً 🌟",
+                "العمل الدؤوب والاهتمام بالتفاصيل هو أول خطوات النجاح والريادة 🎯",
+                "اللهم بارك لنا في أوقاتنا وفي أعمالنا وفي أرزاقنا يا رب العالمين 🙌"
+            ];
+
+            let selectedQuote = "";
+            if (hour >= 5 && hour < 12) {
+                greetingTextEl.innerHTML = "☀️ صباح الخير والبركة.. أهلاً بك!";
+                selectedQuote = morningQuotes[Math.floor(Math.random() * morningQuotes.length)];
+            } else if (hour >= 12 && hour < 23) {
+                greetingTextEl.innerHTML = "🌙 مساؤكم طيب وسعيد.. أهلاً بك!";
+                selectedQuote = eveningQuotes[Math.floor(Math.random() * eveningQuotes.length)];
+            } else {
+                greetingTextEl.innerHTML = "✨ أهلاً وسهلاً بك في فضاء التقنية!";
+                selectedQuote = nightQuotes[Math.floor(Math.random() * nightQuotes.length)];
+            }
+            quoteTextEl.innerHTML = selectedQuote;
+        }
+
         function updateClock() {
             const now = new Date();
             const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -159,11 +232,10 @@
         }
         setInterval(updateClock, 1000);
         updateClock();
+        setupSmartGreeting();
 
-        // 2. دالة جلب البيانات من الصفحتين ودمجهما
         async function loadPrices() {
             try {
-                // محاولة جلب الورقة الأولى (gid=0)
                 let products1 = [];
                 try {
                     const response1 = await fetch(URL_PAGE_1);
@@ -171,7 +243,6 @@
                     products1 = parseCSV(data1);
                 } catch(e) { console.error("خطأ في جلب ورقة 0", e); }
 
-                // محاولة جلب الورقة الثانية (gid=980123048)
                 let products2 = [];
                 try {
                     const response2 = await fetch(URL_PAGE_2);
@@ -179,10 +250,8 @@
                     products2 = parseCSV(data2);
                 } catch(e) { console.error("خطأ في جلب ورقة 980123048", e); }
 
-                // دمج البيانات بالكامل وتصفية الفراغات
                 const combined = [...products1, ...products2];
                 
-                // إلغاء تكرار الأسماء المتطابقة تماماً إن وجدت
                 const uniqueProducts = [];
                 const seenNames = new Set();
                 
@@ -207,7 +276,6 @@
             const lines = csvText.split('\n');
             if (lines.length === 0) return [];
             
-            // تنظيف رؤوس الأعمدة من الرموز والمسافات (مثل # أو -) لضمان القراءة الصحيحة
             const headers = lines[0].replace(/"/g, '').split(',').map(h => {
                 return h.replace('#', '').replace('-', '').replace(' ', '').trim().toLowerCase();
             });
@@ -217,7 +285,6 @@
                 const columns = line.replace(/"/g, '').split(',');
                 let obj = {};
                 headers.forEach((header, index) => {
-                    // معالجة أسماء الأعمدة وتنظيفها
                     let cleanedHeader = header.replace('#', '').replace('-', '').replace(' ', '').trim().toLowerCase();
                     obj[cleanedHeader] = columns[index] ? columns[index].trim() : '';
                 });
@@ -225,7 +292,6 @@
             }).filter(item => item !== null);
         }
 
-        // محرك البحث
         const searchInput = document.getElementById('searchInput');
         const resultsContainer = document.getElementById('resultsContainer');
 
@@ -243,6 +309,12 @@
             displayResults(filtered);
         });
 
+        // دالة مخصصة لتبديل الحالة وإظهار السعر المخفي عند النقر
+        window.revealPrice = function(button, actualPrice) {
+            const cell = button.parentElement;
+            cell.innerHTML = `<span class="badge-min">${actualPrice}</span>`;
+        };
+
         function displayResults(results) {
             if (results.length === 0) {
                 resultsContainer.innerHTML = '<p class="no-result">عذراً، الصنف غير موجود</p>';
@@ -258,12 +330,15 @@
                             </tr>`;
             
             results.forEach(product => {
-                // جلب الحقول بناء على التسميات النظيفة بعد إزالة المسافات والرموز
+                const minPriceValue = product.minprice || '-';
+                
                 html += `<tr>
                             <td><strong>${product.name || '-'}</strong></td>
                             <td>${product.quantity || '-'}</td>
                             <td><span class="badge">${product.price || '-'}</span></td>
-                            <td><span class="badge-min">${product.minprice || '-'}</span></td>
+                            <td>
+                                ${minPriceValue !== '-' ? `<button class="show-price-btn" onclick="revealPrice(this, '${minPriceValue}')">👁️ إظهار</button>` : '-'}
+                            </td>
                          </tr>`;
             });
             
